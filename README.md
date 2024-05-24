@@ -32,6 +32,31 @@ yarn start:dev
   http://localhost:3000/api/v2/seed
   ```
 
-## Stack utilizado
+## Stack utilizado para la aplicación 
 * MongoDB
 * NestJS
+
+
+# Dockerización
+
+## Producción
+
+1. Crear el archivo ```.env.prod ```
+2. Llenar las variables de entorno de producción.
+3. Crear la nueva imagen
+* Build & Run (Solo la primera vez para crear el contenedor de app y de la BD)
+```
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up -d --build
+```
+
+4. Run (si la imagen ya está creada)
+```
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up
+```
+
+## Nota
+Por defecto, docker-compose usa el archivo .env, por lo que si tienen el archivo .env y lo configuran con sus variables de entorno de producción, bastaría con
+```
+docker-compose -f docker-compose.prod.yaml up --build
+```
+No seria necesario cargar un archivo ```.env.prod``` con las variables de entorno de producción por aparte
